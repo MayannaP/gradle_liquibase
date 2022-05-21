@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="">Create user</a>
+        <a href="usersList.html">Get users</a>
+    </nav>
+    <form method="POST"  id="form" action="#">
+        <label for="name">Nome</label>
+        <input type="text" id="name">
+        <label for="email">Email</label>
+        <input type="text" id="email">
+        <label for="cpgf">Cpf</label>
+        <input type="text" id="cpf">
+        <button type="submit" id="submit">
+    </form>
+    <script>
+        const { format } = require("date-fns")
+        
+        const name = document.querySelector("#name")
+        const email = document.querySelector("#email")
+        const cpf = document.querySelector("#cpf")
+        const form = document.querySelector("#form")
+        
+        form.addEventListener("submit", (e)=> { 
+            e.preventDefault();
+            const newUser = {
+                nome: name.value,
+                cpf: cpf.value, 
+                email: email.value
+            }
+            console.log(newUser)
+            fetch("http://localhost:8080/usuario", {method: "post", body: JSON.stringify(newUser), headers: new Headers({'content-type': 'application/json'})})
+        })
+    </script>
+</body>
+</html>
